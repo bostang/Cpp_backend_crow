@@ -2,6 +2,10 @@
 
 Proyek ini adalah contoh sederhana dari backend API RESTful yang dibuat menggunakan C++ dan framework web ringan Crow. API ini mengelola daftar pengguna sederhana dalam memori.
 
+## Demo
+
+![demo](./assets/demo.gif)
+
 ## Fitur API
 
 API ini menyediakan endpoint berikut:
@@ -34,8 +38,7 @@ sudo apt-get install libboost-all-dev libasio-dev libjsoncpp-dev
 **Langkah 1**. Clone repositori ini:
 
 ```bash
-git clone --recurse-submodules <URL_REPOSITORI_ANDA>
-cd Cpp_backend_crow
+git clone --recurse-submodules https://github.com/bostang/Cpp_backend_crow
 ```
 
 Jika Anda sudah melakukan `git clone` tanpa `--recurse-submodules`, jalankan: `git submodule update --init --recursive`.
@@ -43,13 +46,16 @@ Jika Anda sudah melakukan `git clone` tanpa `--recurse-submodules`, jalankan: `g
 **Langkah 2**. Pindah ke direktori proyek:
 
 ```bash
-cd <direktori-proyek-anda>
+cd Cpp_backend_crow
 ```
 
 **Langkah 3**. Kompilasi proyek:
 
 ```bash
 g++ -std=c++17 -o api_server src/main.cpp -I Crow/include -lboost_system -lboost_thread -lpthread
+
+# atau langsung saja:
+make compile
 ```
 
 ## Cara Menjalankan
