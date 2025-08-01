@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C++ API CI
 
 on:
   push:
@@ -8,16 +8,35 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libboost-all-dev libasio-dev libjsoncpp-dev
+
+    - name: Configure the build
+      run: |
+        chmod +x configure
+        ./configure
+
+    - name: Make and Compile the C++ API server
       run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+
+    - name: Run a simple check (optional)
+      run: |
+        # Perintah ini akan memanggil target 'check' di Makefile
+        make check
+        if [ -f "api_server" ]; then
+          echo "Compilation successful. Executable 'api_server' found."
+        else
+          echo "Compilation failed. Executable not found."
+          exit 1
+        fi
+

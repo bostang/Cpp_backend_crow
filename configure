@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# A simple configure script to check for required dependencies.
+# This script is a placeholder and can be expanded for more complex checks.
+
+echo "Checking for required dependencies..."
+
+# Check for g++
+if ! command -v g++ &> /dev/null
+then
+    echo "g++ could not be found. Please install a C++ compiler."
+    exit 1
+fi
+
+# Check for Boost libraries (this is a simplified check)
+if ! dpkg -l | grep -q libboost-all-dev
+then
+    echo "libboost-all-dev not found. Please install Boost libraries."
+    echo "You can run: sudo apt-get install libboost-all-dev"
+    exit 1
+fi
+
+# Check for Crow submodule
+if [ ! -d "Crow/include" ]; then
+    echo "Crow submodule not found. Please initialize and update submodules."
+    echo "Run: git submodule update --init --recursive"
+    exit 1
+fi
+
+echo "Dependencies check passed. Ready to compile with 'make'."
+
